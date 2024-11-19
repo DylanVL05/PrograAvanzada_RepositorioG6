@@ -1,0 +1,82 @@
+﻿@model Proyecto_LibreriaRincondelQuijote.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.Categoria_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Categoria_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.Estado_actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.Estado_actual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponibilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponibilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imagen1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imagen2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imagen3)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoProducto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,63 @@
+﻿@{
+        ViewBag.Title = "Contacto";
+}
+<main aria-labelledby="title">
+    <h2 id="title" class="text-center mb-4">@ViewBag.Title</h2>
+
+    <div class="container">
+        <!-- Información de la librería -->
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-title">Nuestra Sede</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Visítanos en nuestra sede principal:</p>
+                        <address>
+                            <strong>Ubicación:</strong><br />
+                            One Microsoft Way<br />
+                            Redmond, WA 98052-6399<br />
+                            <abbr title="Phone">P:</abbr> 425.555.0100
+                        </address>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-title">Contacta con Nosotros</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Si tienes alguna duda o necesitas más información, contáctanos en cualquiera de los siguientes medios:</p>
+                        <address>
+                            <strong>Soporte:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+                            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapa de Google Maps incrustado en grande -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-title">Ubicación en el Mapa</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <!-- Incrustar el mapa en grande -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.710289937851!2d-122.4194150846816!3d37.77492977975986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085816cc3a70d7d%3A0x15f55f42042d345e!2sSan%20Francisco%2C%20CA!5e0!3m2!1ses!2sus!4v1609742065462!5m2!1ses!2sus"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Agrega un pie de página para más detalles o información adicional -->
+
+</main>

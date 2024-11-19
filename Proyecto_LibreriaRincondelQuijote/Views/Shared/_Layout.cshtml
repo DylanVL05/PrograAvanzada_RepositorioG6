@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+
+    <!-- Script para la compatibilidad con versiones más antiguas -->
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Agregar Bootstrap Icons desde CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Estilo para resaltar los elementos -->
+    <style>
+        /* Fondo de la página: celeste */
+        body {
+            background-color: #e7efff; /* Celeste claro (lightblue) */
+            /**color: white; /* Opcional, para que el texto se vea bien sobre el fondo */
+        }
+
+        .highlight {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <img src="~/Content/images/Logo_Libreria.png" alt="Logo" class="d-inline-block align-top" style="height: 80px;">
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Catálogo", "Index", "Catalogo", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Producto">Productos</a></li>
+                                <li><a class="dropdown-item" href="/Categorias">Categorias</a></li>
+                                <li><a class="dropdown-item" href="/Estadoes">Estado</a></li>
+                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="#">Reseñas</a></li>
+                                <li><a class="dropdown-item" href="#">Historial de Compras</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+
+
+
+                <div class="ms-3">
+                    <a href="@Url.Action("VerCarrito", "Carrito")" class="text-white">
+                        <i class="fas fa-shopping-cart" style="font-size: 1.5rem;"></i>
+                       
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" style="background-color: #6c757d; width: 100%; margin: 0;">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <img src="~/Content/images/Logo_Libreria.png" alt="Company Logo" width="30" height="30" />
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">&copy; @DateTime.Now.Year - Rincón del Quijote, Inc</span>
+        </div>
+
+        <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.710289937851!2d-122.4194150846816!3d37.77492977975986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085816cc3a70d7d%3A0x15f55f42042d345e!2sSan%20Francisco%2C%20CA!5e0!3m2!1ses!2sus!4v1609742065462!5m2!1ses!2sus" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://twitter.com" target="_blank">
+                    <i class="bi bi-twitter" style="font-size: 1.5rem;"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://www.instagram.com" target="_blank">
+                    <i class="bi bi-instagram" style="font-size: 1.5rem;"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://www.facebook.com" target="_blank">
+                    <i class="bi bi-facebook" style="font-size: 1.5rem;"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

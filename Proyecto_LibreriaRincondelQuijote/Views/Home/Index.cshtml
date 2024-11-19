@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title" class="text-center">Librería El Rincón del Quijote</h1>
+
+        <style>
+
+            .custom-carousel-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Esto mantiene la proporción de la imagen sin distorsionarla */
+                max-width: 1920px;
+                max-height: 1080px;
+                margin: auto;
+            }
+        </style>
+
+        <!-- Carrusel de Bootstrap -->
+        <div id="carouselExampleOne" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.fundacionaquae.org/wp-content/uploads/2018/12/libros.jpg" class="d-block w-100" alt="Bienvenida">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.elindependiente.com/wp-content/uploads/2023/10/novelas-y-cuentos-de-terror-1-1200x675.jpg" class="d-block w-100" alt="Libros favoritos">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.papeleriaatenea.com/images/easyblog_articles/12/clasicos-ilustrados-alma-editorial.jpg" class="d-block w-100" alt="Actividades culturales">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleOne" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleOne" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+        <!-- Fin del Carrusel -->
+
+        <p class="lead text-center">Descubre el mundo de los libros y la cultura en <strong>El Rincón del Quijote</strong>. Además de nuestra amplia selección de títulos, ofrecemos actividades para fomentar el amor por la lectura y la creación literaria.</p>
+        <p class="text-center"><a href="#actividades" class="btn btn-primary btn-md">Ver nuestras actividades &raquo;</a></p>
+    </section>
+
+    <div class="row text-center my-5">
+        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
+            <h2 id="gettingStartedTitle">Comienza tu viaje literario</h2>
+            <p>En <strong>El Rincón del Quijote</strong> encontrarás desde los clásicos de la literatura hasta las últimas novedades de autores contemporáneos. Ya sea que busques una novela histórica, un ensayo filosófico o un libro infantil, tenemos algo para ti.</p>
+            <p><a class="btn btn-outline-dark" href="#catalogo">Ver nuestro catálogo &raquo;</a></p>
+        </section>
+        <section class="col-md-4" aria-labelledby="librariesTitle">
+            <h2 id="librariesTitle">Más que una librería</h2>
+            <p>Además de ofrecer una cuidada selección de libros, organizamos talleres literarios, presentaciones de autores y clubes de lectura. Ven y disfruta de nuestras actividades y comparte tu pasión por los libros con otros lectores.</p>
+            <p><a class="btn btn-outline-dark" href="#actividades">Descubre nuestras actividades &raquo;</a></p>
+        </section>
+        <section class="col-md-4" aria-labelledby="hostingTitle">
+            <h2 id="hostingTitle">Cultura en tu comunidad</h2>
+            <p>Somos más que una librería, somos un centro cultural. En <strong>El Rincón del Quijote</strong> apoyamos a escritores locales, organizamos eventos comunitarios y te invitamos a descubrir nuevos mundos literarios junto a otros apasionados de la lectura.</p>
+            <p><a class="btn btn-outline-dark" href="#eventos">Únete a nuestros eventos &raquo;</a></p>
+        </section>
+    </div>
+
+    <!-- Segundo Carrusel de Actividades-->
+    <div id="carouselExampleTwo" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/800x400?text=Club+de+Lectura+de+El+Rincón+del+Quijote" class="d-block w-100" alt="Club de Lectura">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400?text=Taller+de+Escritura+Creativa" class="d-block w-100" alt="Taller de Escritura">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400?text=Presentación+de+libros" class="d-block w-100" alt="Presentación de Libros">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleTwo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleTwo" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading fw-normal lh-1">Tu lugar para descubrir nuevos mundos. <span class="text-body-secondary">Libros que te cambiarán la vida.</span></h2>
+            <p class="lead">Desde clásicos de la literatura universal hasta títulos de autores emergentes, en <strong>El Rincón del Quijote</strong> tenemos el libro perfecto para cada lector. Ven y explora nuestra selección, ¡te esperamos con nuevas recomendaciones cada semana!</p>
+        </div>
+        <div class="col-md-5">
+            <img src="https://emporiolibros.cl/wp-content/uploads/2020/06/1c6846b6-b9e7-4640-9290-c08582aaad54.jpg" class="featurette-image img-fluid mx-auto" alt="Imagen descriptiva 1" width="500" height="500">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading fw-normal lh-1">¡Las actividades literarias no se detienen! <span class="text-body-secondary">Participa en nuestros talleres y clubes de lectura.</span></h2>
+            <p class="lead">A lo largo del año, organizamos actividades como talleres de escritura creativa, presentaciones de libros con autores locales y clubes de lectura para fomentar la conversación literaria. ¡Únete a nosotros y comparte tu pasión por los libros!</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="https://www.casadelaliteratura.gob.pe/wp-content/uploads/2021/10/club.jpg" class="featurette-image img-fluid mx-auto" alt="Imagen descriptiva 2" width="500" height="500">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading fw-normal lh-1">Un espacio para los lectores y escritores. <span class="text-body-secondary">Conviértete en parte de nuestra comunidad.</span></h2>
+            <p class="lead">En **El Rincón del Quijote** no solo vendemos libros, sino que cultivamos una comunidad literaria. Ofrecemos un espacio donde los amantes de los libros pueden compartir experiencias, conocer nuevos autores y participar en actividades que fomentan la creatividad.</p>
+        </div>
+        <div class="col-md-5">
+            <img src="https://static3.depositphotos.com/1003821/176/i/450/depositphotos_1762298-stock-photo-pen-work-hand-work-signature.jpg" class="featurette-image img-fluid mx-auto" alt="Imagen descriptiva 3" width="500" height="500">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+
+    <!-- Otros Featurettes de actividades -->
+    <!-- Puedes agregar más secciones de 'featurette' según sea necesario para destacar otras actividades y secciones. -->
+
+</main>
+
+
