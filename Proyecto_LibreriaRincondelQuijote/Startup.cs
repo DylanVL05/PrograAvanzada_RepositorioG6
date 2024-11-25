@@ -15,7 +15,7 @@ namespace Proyecto_LibreriaRincondelQuijote
                 InitializeRoles();  // Llamar solo a la creación de roles
             }
 
-            private void InitializeRoles()
+          /**  private void InitializeRoles()
             {
                 using (var context = new ApplicationDbContext())
                 {
@@ -55,8 +55,8 @@ namespace Proyecto_LibreriaRincondelQuijote
                             // Asignar el rol "Admin" al nuevo usuario
                             userManager.AddToRole(user.Id, "Admin");
                         }
-                    }
+                    }**/
                 }
             }
-        }
-    }
+        
+    
