@@ -1,86 +1,54 @@
 ﻿@model Proyecto_LibreriaRincondelQuijote.Models.Carrito
 
-@{
-    ViewBag.Title = "Carrito de Compras";
+<h2>Tu Carrito</h2>
 
-    // Calculamos el total solo una vez y lo almacenamos en una variable
-    var total = Model.CarritosProductos
-                    .Where(cp => cp.Producto != null)  // Filtra los productos no nulos
-                    .Sum(cp => cp.Producto.Precio);   // Suma los precios de los productos
+<!-- Mostrar mensaje de error si no hay suficiente stock -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
 }
 
-<h2>Carrito de Compras</h2>
-
-@if (Model.CarritosProductos != null && Model.CarritosProductos.Any())
-{
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CarritosProductos)
+        {
             <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th>Acción</th>
+                <td>@item.Producto.Nombre</td>
+                <td>@item.Producto.Precio</td>
+                <td>
+                    <form action="@Url.Action("ActualizarCantidad", new { id = item.CodigoCarrito })" method="post">
+                        <input type="number" name="Cantidad" value="@item.Cantidad" min="1" max="@item.Producto.Disponibilidad" />
+                        <input type="submit" value="Actualizar" class="btn btn-sm btn-primary" />
+                    </form>
+                </td>
+                <td>@(item.Cantidad * item.Producto.Precio)</td>
+                <td>
+                    @Html.ActionLink("Eliminar", "EliminarDelCarrito", new { id = item.CodigoCarrito }, new { @class = "btn btn-danger btn-sm" })
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.CarritosProductos)
-            {
-                <tr>
-                    <td>
-                        @if (item.Producto != null)
-                        {
-                            @item.Producto.Nombre
-                        }
-                        else
-                        {
-                            <span>Producto no disponible</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.Producto != null)
-                        {
-                            @item.Producto.Precio.ToString("C")
-                        }
-                        else
-                        {
-                            <span>No disponible</span>
-                        }
-                    </td>
-                    <td>1</td> <!-- Aquí puedes agregar la cantidad si deseas -->
-                    <td>
-                        @if (item.Producto != null)
-                        {
-                            @(item.Producto.Precio.ToString("C"))
-                        }
-                        else
-                        {
-                            <span>No disponible</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Eliminar", "EliminarDelCarrito", new { id = item.CodigoCarrito }, new { @class = "btn btn-danger" })
-                    </td>
+        }
+    </tbody>
+</table>
 
-                </tr>
-            }
-        </tbody>
-    </table>
+<!-- Formulario para proceder con la compra -->
+<form action="@Url.Action("Comprar", "Carrito")" method="post">
+    @foreach (var item in Model.CarritosProductos)
+    {
+        <!-- Crear un campo oculto con la cantidad de cada producto -->
+        <input type="hidden" name="Cantidad_@item.CodigoCarrito" value="@item.Cantidad" />
+    }
 
-    <div class="d-flex justify-content-end">
-        <h4>
-            Total:
-            @total.ToString("C") <!-- Muestra el total formateado como moneda -->
-        </h4>
-    </div>
-
-    <!-- Aquí puedes agregar un botón para proceder a la compra -->
-    <div class="mt-3">
-        <a href="@Url.Action("ProcederAlPago", "Carrito")" class="btn btn-primary">Proceder al Pago</a>
-    </div>
-
-}
-else
-{
-    <p>No tienes productos en tu carrito.</p>
-}
+    <!-- Botón de proceder al pago -->
+    <button type="submit" class="btn btn-success">Proceder al Pago</button>
+</form>

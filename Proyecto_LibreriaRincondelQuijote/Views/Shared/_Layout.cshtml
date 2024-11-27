@@ -48,8 +48,10 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Catálogo", "Index", "Catalogo", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Historial de compras", "VerHistorial", "Historial", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item dropdown">
@@ -58,9 +60,10 @@
                                 <li><a class="dropdown-item" href="/Producto">Productos</a></li>
                                 <li><a class="dropdown-item" href="/Categorias">Categorias</a></li>
                                 <li><a class="dropdown-item" href="/Estadoes">Estado</a></li>
-                                <li><a class="dropdown-item" href="#">Usuarios</a></li>
-                                <li><a class="dropdown-item" href="#">Reseñas</a></li>
-                                <li><a class="dropdown-item" href="#">Historial de Compras</a></li>
+                                <li><a class="dropdown-item" href="/Resenas">Reseñas</a></li>
+                                <li><a class="dropdown-item" href="/AspNetUsers">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="/HistorialCompras">Historial de Compras</a></li>
+
                             </ul>
                         </li>
                     }

@@ -40,37 +40,53 @@ namespace Proyecto_LibreriaRincondelQuijote.Controllers
 
 
         // Acción para agregar un producto al carrito
-        public ActionResult AgregarAlCarrito(int productoId)
+        public ActionResult AgregarAlCarrito(int productoId, int cantidad)
         {
             // Obtener el carrito del usuario
             var carrito = ObtenerCarrito();
 
-            // Verificar si el producto ya está en el carrito
+            // Buscar el producto en el carrito
             var productoEnCarrito = carrito.CarritosProductos
                                            .FirstOrDefault(cp => cp.CodigoProducto == productoId);
+
+            var producto = db.Productos.Find(productoId);
+
+            // Verificar si el producto existe
+            if (producto == null)
+            {
+                return RedirectToAction("Error", new { mensaje = "Producto no encontrado" });
+            }
+
+            // Verificar si la cantidad solicitada no supera la disponibilidad del producto
+            if (cantidad > producto.Disponibilidad)
+            {
+                TempData["Error"] = "No hay suficiente stock para completar la solicitud.";
+                return RedirectToAction("VerCarrito");
+            }
 
             if (productoEnCarrito == null)
             {
                 // Si el producto no está en el carrito, lo agregamos
-                var producto = db.Productos.Find(productoId);
-                if (producto != null)
+                carrito.CarritosProductos.Add(new CarritoProducto
                 {
-                    // Agregar el producto al carrito
-                    carrito.CarritosProductos.Add(new CarritoProducto
-                    {
-                        Carrito = carrito,
-                        Producto = producto
-                    });
-
-                    db.SaveChanges(); // Guardamos los cambios en la base de datos
-                }
+                    Carrito = carrito,
+                    Producto = producto,
+                    Cantidad = cantidad
+                });
+            }
+            else
+            {
+                // Si el producto ya está en el carrito, actualizamos la cantidad
+                productoEnCarrito.Cantidad += cantidad;
             }
 
+            db.SaveChanges(); // Guardamos los cambios en la base de datos
+
+            // Redirigir a la vista del carrito
             return RedirectToAction("VerCarrito");
         }
-
         [HttpPost]
-        public ActionResult ProcederAlPago(FormCollection form)
+        public ActionResult Comprar(FormCollection form)
         {
             // Obtener el carrito del usuario
             var carrito = ObtenerCarrito();
@@ -78,6 +94,9 @@ namespace Proyecto_LibreriaRincondelQuijote.Controllers
             // Verificar si el carrito tiene productos
             if (carrito.CarritosProductos != null && carrito.CarritosProductos.Any())
             {
+                // Lista para guardar los productos que deben ser eliminados
+                var productosAEliminar = new List<Producto>();
+
                 foreach (var item in carrito.CarritosProductos)
                 {
                     var producto = item.Producto;
@@ -96,7 +115,8 @@ namespace Proyecto_LibreriaRincondelQuijote.Controllers
                                 CodigoProducto = producto.CodigoProducto,
                                 Producto = producto,
                                 Precio = producto.Precio,
-                                FechaCompra = DateTime.Now
+                                FechaCompra = DateTime.Now,
+                                Cantidad = cantidad
                             };
 
                             db.HistorialCompras.Add(historial);
@@ -106,29 +126,46 @@ namespace Proyecto_LibreriaRincondelQuijote.Controllers
                         if (producto.Disponibilidad >= cantidad)
                         {
                             producto.Disponibilidad -= cantidad; // Restamos la cantidad comprada
+
+                            // Si la disponibilidad llega a cero, marcar el producto para eliminación
+                            if (producto.Disponibilidad == 0)
+                            {
+                                productosAEliminar.Add(producto); // Agregar a la lista de productos para eliminar
+                            }
                         }
                         else
                         {
                             // Si la disponibilidad es menor a la cantidad solicitada, manejar el error
-                            return RedirectToAction("Error", new { mensaje = "No hay suficiente stock para completar la compra" });
+                            TempData["Error"] = "No hay suficiente stock para completar la compra.";
+                            return RedirectToAction("VerCarrito");
                         }
                     }
                 }
 
-                // Eliminar los productos del carrito
-                db.Carritos.Remove(carrito);
+                // Eliminar los productos marcados después de que se haya completado el foreach
+                foreach (var producto in productosAEliminar)
+                {
+                    db.Productos.Remove(producto); // Eliminar los productos de la base de datos
+                }
 
-                // Guardar los cambios en la base de datos
-                db.SaveChanges();
+                // Eliminar el carrito después de la compra
+                db.Carritos.Remove(carrito); // Eliminar el carrito
+                db.SaveChanges(); // Guardar los cambios en la base de datos
 
                 // Redirigir al usuario a la página de éxito de compra
                 return RedirectToAction("CompraExitosa");
             }
 
             // Si el carrito está vacío, redirigir a la vista del carrito
+            TempData["Error"] = "Tu carrito está vacío. No puedes proceder con la compra.";
             return RedirectToAction("VerCarrito");
         }
 
+
+        public ActionResult CompraExitosa()
+        {
+            return View();
+        }
 
 
 
@@ -159,6 +196,45 @@ namespace Proyecto_LibreriaRincondelQuijote.Controllers
             // Redirigir al carrito para que se actualice la vista
             return RedirectToAction("VerCarrito");
         }
+
+
+
+        [HttpPost]
+        public ActionResult ActualizarCantidad(int id, int cantidad)
+        {
+            // Obtener el carrito del usuario
+            var carrito = ObtenerCarrito();
+
+            // Buscar el producto en el carrito
+            var productoEnCarrito = carrito.CarritosProductos.FirstOrDefault(cp => cp.CodigoCarrito == id);
+            var producto = db.Productos.Find(productoEnCarrito.CodigoProducto);
+
+            if (producto != null)
+            {
+                // Verificar que la cantidad no exceda la disponibilidad
+                if (cantidad > producto.Disponibilidad)
+                {
+                    TempData["Error"] = "No hay suficiente stock para completar la solicitud.";
+                    return RedirectToAction("VerCarrito");
+                }
+
+                // Actualizar la cantidad
+                productoEnCarrito.Cantidad = cantidad;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("VerCarrito");
+        }
+
+
+
+
+
+
+
+
+
+
 
         // Acción para ver el carrito
         public ActionResult VerCarrito()

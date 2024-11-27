@@ -1,0 +1,36 @@
+﻿@model Proyecto_LibreriaRincondelQuijote.Models.Resena
+
+@{
+    ViewBag.Title = "Editar Reseña";
+}
+
+<h2>Editar Reseña</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CodigoProducto)
+        @Html.DropDownListFor(model => model.CodigoProducto, (SelectList)ViewBag.CodigoProducto, "Seleccione Producto", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CodigoProducto)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TextoResena)
+        @Html.TextAreaFor(model => model.TextoResena, new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(model => model.TextoResena)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Calificacion)
+        @Html.EditorFor(model => model.Calificacion)
+        @Html.ValidationMessageFor(model => model.Calificacion)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+    </div>
+}
+
+@Html.ActionLink("Volver a la lista de reseñas", "Index")

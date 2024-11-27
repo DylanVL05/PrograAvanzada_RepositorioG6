@@ -1,82 +1,71 @@
 ﻿@model Proyecto_LibreriaRincondelQuijote.Models.Producto
-
+@using System.Web.Mvc
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Nombre;
 }
 
-<h2>Details</h2>
+<h2>@Model.Nombre</h2>
 
+<!-- Mostrar las imágenes del producto -->
 <div>
-    <h4>Producto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Categoria.Categoria_)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Categoria.Categoria_)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado.Estado_actual)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado.Estado_actual)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Disponibilidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Disponibilidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagen1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Imagen1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagen2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Imagen2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Imagen3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Imagen3)
-        </dd>
-
-    </dl>
+    @if (!string.IsNullOrEmpty(Model.Imagen1))
+    {
+        <img src="@Url.Content(Model.Imagen1)" alt="Imagen 1" class="img-fluid" />
+    }
+    @if (!string.IsNullOrEmpty(Model.Imagen2))
+    {
+        <img src="@Url.Content(Model.Imagen2)" alt="Imagen 2" class="img-fluid" />
+    }
+    @if (!string.IsNullOrEmpty(Model.Imagen3))
+    {
+        <img src="@Url.Content(Model.Imagen3)" alt="Imagen 3" class="img-fluid" />
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoProducto }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<!-- Información del producto -->
+<p>Precio: @Model.Precio</p>
+<p>Disponibilidad: @(Model.Disponibilidad > 0 ? "Disponible" : "No disponible")</p>
+
+<hr />
+
+<!-- Sección de reseñas -->
+<h3>Reseñas</h3>
+
+<!-- Mostrar las reseñas existentes -->
+@foreach (var resena in Model.Resenas)
+{
+    <div class="resena">
+        <p>
+            <!-- Verificar si el usuario tiene un nombre de usuario (UserName) -->
+            <strong>@(resena.Usuario != null ? resena.Usuario.UserName : "Usuario desconocido")</strong> -
+            Calificación: @resena.Calificacion
+        </p>
+        <p>@resena.TextoResena</p>
+        <hr />
+    </div>
+}
+
+<!-- Formulario para agregar una nueva reseña -->
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.BeginForm("AgregarResena", "Catalogo", new { id = Model.CodigoProducto }, FormMethod.Post)
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label for="TextoResena">Comentario</label>
+            @Html.TextArea("TextoResena", null, new { @class = "form-control", rows = 4 })
+        </div>
+
+        <div class="form-group">
+            <label for="Calificacion">Calificación</label>
+            @Html.DropDownList("Calificacion", new SelectList(Enumerable.Range(1, 5), null), "- Seleccione -", new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+    }
+}
+else
+{
+    <p>Inicia sesión para dejar una reseña.</p>
+}

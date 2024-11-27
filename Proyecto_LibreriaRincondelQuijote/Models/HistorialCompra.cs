@@ -16,5 +16,10 @@ namespace Proyecto_LibreriaRincondelQuijote.Models
 
         public decimal Precio { get; set; }
         public DateTime FechaCompra { get; set; }
+
+
+        public int Cantidad { get; set; }
+
+
     }
 }

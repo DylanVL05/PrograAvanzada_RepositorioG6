@@ -1,0 +1,55 @@
+﻿@model Proyecto_LibreriaRincondelQuijote.Models.Resena
+
+@{
+    ViewBag.Title = "Eliminar Reseña";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Enlace a Bootstrap para los estilos -->
+   
+</head>
+<body>
+    <div class="container my-4">
+        <h2 class="text-center mb-4">Eliminar Reseña</h2>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h4>¿Está seguro de que desea eliminar esta reseña?</h4>
+                <hr />
+                <dl class="row">
+                    <!-- Detalles del Producto asociado -->
+                    
+
+                    <!-- Detalles de la Reseña -->
+                    <dt class="col-sm-4">Texto de la Reseña</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.TextoResena)</dd>
+
+                    <dt class="col-sm-4">Calificación</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Calificacion)</dd>
+
+                    <dt class="col-sm-4">Usuario</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.UserId)</dd>
+                </dl>
+
+                <!-- Formulario de eliminación -->
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color text-center">
+                        <input type="submit" value="Eliminar" class="btn btn-danger btn-lg" />
+                        <a href="@Url.Action("Index", "Resenas")" class="btn btn-secondary btn-lg">Volver a la lista</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

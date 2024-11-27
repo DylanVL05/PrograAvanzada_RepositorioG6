@@ -14,6 +14,6 @@ namespace Proyecto_LibreriaRincondelQuijote.Models
         public int CodigoProducto { get; set; }
         public Producto Producto { get; set; }
 
-
+        public int Cantidad { get; set; }
     }
 }

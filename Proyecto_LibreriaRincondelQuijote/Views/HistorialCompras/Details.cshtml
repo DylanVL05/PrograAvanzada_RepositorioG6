@@ -1,0 +1,40 @@
+﻿@model Proyecto_LibreriaRincondelQuijote.Models.HistorialCompra
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h2 class="text-primary">Detalles del Historial de Compra</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Producto.Nombre)</dt>
+            <dd>@Html.DisplayFor(model => model.Producto.Nombre)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.UserId)</dt>
+            <dd>@Html.DisplayFor(model => model.UserId)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Precio)</dt>
+            <dd>@Html.DisplayFor(model => model.Precio)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.FechaCompra)</dt>
+            <dd>@Html.DisplayFor(model => model.FechaCompra)</dd>
+
+          
+        </dl>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoHistorial }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary" })
+        </p>
+    </div>
+</body>
+</html>

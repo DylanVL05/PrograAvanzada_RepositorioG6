@@ -4,9 +4,12 @@
 
 <h2>Catálogo de Productos</h2>
 
-<p>
-    @Html.ActionLink("Crear Nuevo Producto", "Create", null, new { @class = "btn btn-primary" })
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Crear Nuevo Producto", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
 
 <div class="container-fluid">
     <div class="row">
@@ -88,7 +91,7 @@
             </div>
 
             <!-- Si no hay productos que mostrar -->
-         
+
         </div>
     </div>
 </div>

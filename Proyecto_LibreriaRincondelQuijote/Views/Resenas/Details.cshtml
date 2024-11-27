@@ -1,0 +1,50 @@
+﻿@model Proyecto_LibreriaRincondelQuijote.Models.Resena
+
+@{
+    ViewBag.Title = "Detalles de la Reseña";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Enlace a Bootstrap para los estilos -->
+
+</head>
+<body>
+    <div class="container my-4">
+        <h2 class="text-center mb-4">Detalles de la Reseña</h2>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h4>Reseña del Producto</h4>
+                <hr />
+                <dl class="row">
+                    <!-- Detalles del Producto asociado -->
+                    
+
+                    <!-- Detalles de la Reseña -->
+                    <dt class="col-sm-4">Texto de la Reseña</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.TextoResena)</dd>
+
+                    <dt class="col-sm-4">Calificación</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Calificacion)</dd>
+
+                    <dt class="col-sm-4">Usuario</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.UserId)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Edit", "Resenas", new { id = Model.CodigoResena })" class="btn btn-primary btn-lg">Editar</a>
+            <a href="@Url.Action("Index", "Resenas")" class="btn btn-secondary btn-lg">Volver a la Lista</a>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+ 
+</body>
+</html>

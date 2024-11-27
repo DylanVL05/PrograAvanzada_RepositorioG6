@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Proyecto_LibreriaRincondelQuijote.Models.HistorialCompra>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h2 class="text-primary">Historial de Compras</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary mb-3" })
+        </p>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Producto.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                    <th>@Html.DisplayNameFor(model => model.FechaCompra)</th>
+                   
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Producto.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FechaCompra)</td>
+                     
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CodigoHistorial }, new { @class = "btn btn-warning btn-sm" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.CodigoHistorial }, new { @class = "btn btn-info btn-sm" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CodigoHistorial }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

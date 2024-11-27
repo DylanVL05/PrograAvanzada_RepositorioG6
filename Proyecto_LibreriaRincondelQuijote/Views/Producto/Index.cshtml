@@ -7,69 +7,82 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Categoria.Categoria_)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado.Estado_actual)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Disponibilidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Imagen1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Imagen2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Imagen3)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria.Categoria_)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.Estado_actual)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disponibilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imagen1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imagen2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imagen3)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoProducto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CodigoProducto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoProducto })
-        </td>
-    </tr>
-}
-
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria.Categoria_)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado.Estado_actual)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disponibilidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen3)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Categoria_)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.Estado_actual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disponibilidad)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Imagen1))
+                    {
+                        <img src="@item.Imagen1" alt="Imagen 1" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Imagen2))
+                    {
+                        <img src="@item.Imagen2" alt="Imagen 2" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Imagen3))
+                    {
+                        <img src="@item.Imagen3" alt="Imagen 3" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CodigoProducto }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CodigoProducto }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CodigoProducto })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

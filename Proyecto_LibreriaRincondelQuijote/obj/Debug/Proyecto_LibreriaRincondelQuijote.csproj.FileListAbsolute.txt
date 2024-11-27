@@ -100,5 +100,5 @@ D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuij
 D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.pdb
 D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.Migrations.Inicio.resources
 D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.csproj.GenerateResource.cache
-D:\Documentos\Universidad 5to cuatrimestre\Lenguaje BD\ProgramaC#\PrograAvanzada_RepositorioG6\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.dll
-D:\Documentos\Universidad 5to cuatrimestre\Lenguaje BD\ProgramaC#\PrograAvanzada_RepositorioG6\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.pdb
+D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.Migrations.Cantidad_CarritoProducto.resources
+D:\C#\Proyecto_LibreriaRincondelQuijote\obj\Debug\Proyecto_LibreriaRincondelQuijote.Migrations.AddCantidadToHistorialCompra.resources

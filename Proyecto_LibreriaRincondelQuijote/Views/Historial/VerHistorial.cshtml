@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Proyecto_LibreriaRincondelQuijote.Models.HistorialCompra>
+
+@{
+    ViewBag.Title = "Historial de Compras";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<!-- Mostrar mensaje de error si no hay historial -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<!-- Mostrar mensaje si no hay compras registradas -->
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        No tienes compras registradas.
+    </div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Fecha de Compra</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var historial in Model)
+            {
+                <tr>
+                    <td>
+                        @if (historial.Producto != null)
+                        {
+                            @historial.Producto.Nombre
+                        }
+                        else
+                        {
+                            <span class="text-danger">Producto no disponible</span>
+                        }
+                    </td>
+                    <td>
+                        @if (historial.Producto != null)
+                        {
+                            @historial.Precio.ToString("C")
+                        }
+                        else
+                        {
+                            <span class="text-danger">No disponible</span>
+                        }
+                    </td>
+               
+
+                    <td>@historial.FechaCompra.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

@@ -162,18 +162,30 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EstadoesController.cs" />
+    <Compile Include="Controllers\HistorialComprasController.cs" />
+    <Compile Include="Controllers\HistorialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ResenasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202411171802597_Inicio.cs" />
     <Compile Include="Migrations\202411171802597_Inicio.designer.cs">
       <DependentUpon>202411171802597_Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411191458337_Cantidad_CarritoProducto.cs" />
+    <Compile Include="Migrations\202411191458337_Cantidad_CarritoProducto.designer.cs">
+      <DependentUpon>202411191458337_Cantidad_CarritoProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411250723500_AddCantidadToHistorialCompra.cs" />
+    <Compile Include="Migrations\202411250723500_AddCantidadToHistorialCompra.designer.cs">
+      <DependentUpon>202411250723500_AddCantidadToHistorialCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -271,9 +283,6 @@
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
-    <Content Include="Views\Catalogo\Create.cshtml" />
-    <Content Include="Views\Catalogo\Delete.cshtml" />
-    <Content Include="Views\Catalogo\Details.cshtml" />
     <Content Include="Views\Catalogo\Edit.cshtml" />
     <Content Include="Views\Catalogo\Index.cshtml" />
     <Content Include="Views\Estadoes\Create.cshtml" />
@@ -283,6 +292,19 @@
     <Content Include="Views\Estadoes\Index.cshtml" />
     <Content Include="Views\Carrito\VerCarrito.cshtml" />
     <Content Include="Views\Carrito\CompraExitosa.cshtml" />
+    <Content Include="Views\Resenas\Create.cshtml" />
+    <Content Include="Views\Resenas\Edit.cshtml" />
+    <Content Include="Views\Resenas\Index.cshtml" />
+    <Content Include="Views\Resenas\Details.cshtml" />
+    <Content Include="Views\Resenas\Delete.cshtml" />
+    <Content Include="Views\Historial\VerHistorial.cshtml" />
+    <Content Include="Views\HistorialCompras\Create.cshtml" />
+    <Content Include="Views\HistorialCompras\Delete.cshtml" />
+    <Content Include="Views\HistorialCompras\Details.cshtml" />
+    <Content Include="Views\HistorialCompras\Edit.cshtml" />
+    <Content Include="Views\HistorialCompras\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +339,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202411171802597_Inicio.resx">
       <DependentUpon>202411171802597_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411191458337_Cantidad_CarritoProducto.resx">
+      <DependentUpon>202411191458337_Cantidad_CarritoProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411250723500_AddCantidadToHistorialCompra.resx">
+      <DependentUpon>202411250723500_AddCantidadToHistorialCompra.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

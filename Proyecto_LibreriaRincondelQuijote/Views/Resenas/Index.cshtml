@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Proyecto_LibreriaRincondelQuijote.Models.Resena>
+
+@{
+    ViewBag.Title = "Reseñas";
+}
+
+<h2>Reseñas</h2>
+
+<p>
+    @Html.ActionLink("Crear nueva reseña", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Texto de la Reseña</th>
+            <th>Calificación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var resena in Model)
+        {
+            <tr>
+                <td>@resena.Producto.Nombre</td>
+                <td>@resena.TextoResena</td>
+                <td>@resena.Calificacion</td>
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = resena.CodigoResena }) |
+                    @Html.ActionLink("Editar", "Edit", new { id = resena.CodigoResena }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = resena.CodigoResena })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

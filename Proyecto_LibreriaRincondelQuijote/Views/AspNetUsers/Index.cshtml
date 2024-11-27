@@ -1,0 +1,33 @@
+﻿<h2>Usuarios</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Correo electrónico</th>
+            <th>Roles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    @if (ViewBag.UserRoles != null && ViewBag.UserRoles.ContainsKey(user.Id))
+                    {
+                        var roles = ViewBag.UserRoles[user.Id];
+                        foreach (var role in roles)
+                        {
+                            <span>@role</span><br />
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = user.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = user.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

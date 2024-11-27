@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Proyecto_LibreriaRincondelQuijote.Models
 {
-    [Authorize]  
+     
     public class CatalogoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -58,9 +58,17 @@ namespace Proyecto_LibreriaRincondelQuijote.Models
             ViewBag.Categorias = categorias ?? new List<string>();
 
             // Obtener el rango de precios disponible en la base de datos (mínimo y máximo)
-            ViewBag.MinPrecio = db.Productos.Min(p => p.Precio);
-            ViewBag.MaxPrecio = db.Productos.Max(p => p.Precio);
-
+            try
+            {
+                ViewBag.MinPrecio = db.Productos.Min(p => p.Precio);
+                ViewBag.MaxPrecio = db.Productos.Max(p => p.Precio);
+            }
+            catch (InvalidOperationException)
+            {
+                // Si no hay productos en la base de datos entonces valores predeterminados
+                ViewBag.MinPrecio = 0;
+                ViewBag.MaxPrecio = 0;
+            }
             // Opciones de disponibilidad: 0: No disponible, 1: Disponible
             ViewBag.Disponibilidad = new List<int> { 0, 1 };
 
@@ -72,7 +80,7 @@ namespace Proyecto_LibreriaRincondelQuijote.Models
 
 
 
-        
+        [Authorize]
         public ActionResult AgregarCarrito(int id)
         {
             // Obtener el usuario autenticado
@@ -117,118 +125,69 @@ namespace Proyecto_LibreriaRincondelQuijote.Models
             // Redirigir al catálogo (puedes cambiar esto según la lógica de tu aplicación)
             return RedirectToAction("Index");
         }
-    
 
 
-
-
-
-
-
-
-    // GET: Catalogo/Details/5
-    public ActionResult Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Productos.Find(id);
+
+            // Obtener el producto junto con las reseñas asociadas
+            Producto producto = db.Productos.Include("Resenas")
+                                            .FirstOrDefault(p => p.CodigoProducto == id);
+
             if (producto == null)
             {
                 return HttpNotFound();
             }
-            return View(producto);
+
+            // Ya no es necesario asignar reseñas a ViewBag, ya que están en el modelo
+            return View(producto); // Pasar solo el producto, ya que las reseñas están en el modelo
         }
 
-        // GET: Catalogo/Create
-        public ActionResult Create()
-        {
-            ViewBag.CodigoCategoria = new SelectList(db.Categorias, "CodigoCategoria", "Categoria_");
-            ViewBag.CodigoEstado = new SelectList(db.Estados, "CodigoEstado", "Estado_actual");
-            return View();
-        }
 
-        // POST: Catalogo/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CodigoProducto,Nombre,Precio,Disponibilidad,Imagen1,Imagen2,Imagen3,CodigoEstado,CodigoCategoria")] Producto producto)
+        [Authorize]
+        public ActionResult AgregarResena(int id, string TextoResena, int Calificacion)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                db.Productos.Add(producto);
+                // Obtener el usuario actual
+                string userId = User.Identity.GetUserId(); // Usar la identidad para obtener el usuario
+
+                // Obtener el producto al que se va a agregar la reseña
+                Producto producto = db.Productos.Find(id);
+                if (producto == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Crear una nueva reseña
+                var resena = new Resena
+                {
+                    TextoResena = TextoResena,
+                    Calificacion = Calificacion,
+                    UserId = userId, // Relacionamos la reseña con el usuario logueado
+                    CodigoProducto = id,
+                    Producto = producto // Relacionamos la reseña con el producto
+                };
+
+                // Guardar la reseña en la base de datos
+                db.Resenas.Add(resena);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                // Redirigir a la página de detalles para mostrar la reseña
+                return RedirectToAction("Details", new { id = id });
             }
 
-            ViewBag.CodigoCategoria = new SelectList(db.Categorias, "CodigoCategoria", "Categoria_", producto.CodigoCategoria);
-            ViewBag.CodigoEstado = new SelectList(db.Estados, "CodigoEstado", "Estado_actual", producto.CodigoEstado);
-            return View(producto);
+            return RedirectToAction("Login", "Account");
         }
 
-        // GET: Catalogo/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Producto producto = db.Productos.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CodigoCategoria = new SelectList(db.Categorias, "CodigoCategoria", "Categoria_", producto.CodigoCategoria);
-            ViewBag.CodigoEstado = new SelectList(db.Estados, "CodigoEstado", "Estado_actual", producto.CodigoEstado);
-            return View(producto);
-        }
 
-        // POST: Catalogo/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CodigoProducto,Nombre,Precio,Disponibilidad,Imagen1,Imagen2,Imagen3,CodigoEstado,CodigoCategoria")] Producto producto)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(producto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CodigoCategoria = new SelectList(db.Categorias, "CodigoCategoria", "Categoria_", producto.CodigoCategoria);
-            ViewBag.CodigoEstado = new SelectList(db.Estados, "CodigoEstado", "Estado_actual", producto.CodigoEstado);
-            return View(producto);
-        }
-
-        // GET: Catalogo/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Producto producto = db.Productos.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(producto);
-        }
-
-        // POST: Catalogo/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Producto producto = db.Productos.Find(id);
-            db.Productos.Remove(producto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+   
         protected override void Dispose(bool disposing)
         {
             if (disposing)
