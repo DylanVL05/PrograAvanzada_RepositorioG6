@@ -47,7 +47,7 @@ Este proyecto consiste en el desarrollo de un sitio web de **comercio electróni
   
 ### Pasos para ejecutar el proyecto:
 
-1. Clona este repositorio:
+1. Clona este repositorio
    
 2.Descagar el .bak para la base 
 
