@@ -47,11 +47,7 @@ Este proyecto consiste en el desarrollo de un sitio web de **comercio electróni
   
 ### Pasos para ejecutar el proyecto:
 
-Clonar el repo
-
-   ```bash
-   git clone https://github.com/DVL05/PrograAvanzada_RepositorioG6.git
-   exit
+1.Clonar el repo
    
 2.Descagar el .bak para la base 
 
