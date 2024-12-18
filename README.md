@@ -48,6 +48,10 @@ Este proyecto consiste en el desarrollo de un sitio web de **comercio electróni
 ### Pasos para ejecutar el proyecto:
 
 Clonar el repo
+
+   ```bash
+   git clone https://github.com/DVL05/PrograAvanzada_RepositorioG6.git
+   exit
    
 2.Descagar el .bak para la base 
 
@@ -56,8 +60,6 @@ Clonar el repo
 4.Cambiar o ajustar el conection string del webconfig segun la ruta y nombre del servicio del sql
 
 
-   ```bash
-   git clone https://github.com/DVL05/PrograAvanzada_RepositorioG6.git
 
 
 
