@@ -48,9 +48,7 @@ Este proyecto consiste en el desarrollo de un sitio web de **comercio electróni
 ### Pasos para ejecutar el proyecto:
 
 1. Clona este repositorio:
-   ```bash
-  https://github.com/DylanVL05/PrograAvanzada_RepositorioG6.git
-
+   
 2.Descagar el .bak para la base 
 
 3.Abrir el pryecto y el SQL Management studio restaurar base 
