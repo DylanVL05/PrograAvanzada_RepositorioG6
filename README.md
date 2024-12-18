@@ -47,17 +47,17 @@ Este proyecto consiste en el desarrollo de un sitio web de **comercio electróni
   
 ### Pasos para ejecutar el proyecto:
 
-1. Clona este repositorio
+Clonar el repo
    
 2.Descagar el .bak para la base 
 
 3.Abrir el pryecto y el SQL Management studio restaurar base 
 
-4.Cambiar o ajustar el conection string del webconfig segun la ruta y nombre del servicio 
-Ejemplo:
-<connectionStrings>
-    <add name="DefaultConnection"
-         connectionString="Data Source=MI_SERVIDOR;AttachDbFilename=C:\Ruta\A\Tu\BaseDeDatos.mdf;Initial Catalog=NombreDeBaseDeDatos;Integrated Security=True"
-         providerName="System.Data.SqlClient" />
-</connectionStrings>
+4.Cambiar o ajustar el conection string del webconfig segun la ruta y nombre del servicio del sql
+
+
+   ```bash
+   git clone https://github.com/DVL05/PrograAvanzada_RepositorioG6.git
+
+
 
